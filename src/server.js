@@ -18,6 +18,9 @@ server.listen(port, () => console.log(`Listening on http://localhost:${port}`));
 
 // and ws server at the same time
 const wss = new WebSocket.Server({ server });
-wss.on("connection", (client_socket) =>
-  console.log(`============\nsocket: \n${client_socket}\n============\n`)
-);
+wss.on("connection", (client_socket) => {
+  console.log("Connected to a browser");
+  client_socket.on("close", () => console.log("Disconnected from a browser."));
+  client_socket.on("message", (message) => console.log(message));
+  client_socket.send("hello!!!");
+});
