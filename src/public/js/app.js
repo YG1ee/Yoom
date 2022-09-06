@@ -34,6 +34,7 @@ const handleNickSubmit = (event) => {
   event.preventDefault();
   const input = nicknameForm.querySelector("input");
   server_socket.send(makeMessage("nickname", input.value));
+  input.value = "";
 };
 
 messageForm.addEventListener("submit", handleSubmit);
