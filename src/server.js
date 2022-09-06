@@ -1,4 +1,5 @@
 import express from "express";
+import http from "http";
 import WebSocket from "ws";
 
 const app = express();
@@ -13,11 +14,10 @@ const port = 3000;
 
 // http server
 const server = http.createServer(app);
-const handleListen = () => console.log(`Listening on http://localhost:${port}`);
-server.listen(port, handleListen);
+server.listen(port, () => console.log(`Listening on http://localhost:${port}`));
 
 // and ws server at the same time
 const wss = new WebSocket.Server({ server });
-const handleConnection = (client_socket) =>
-  console.log(`============\nsocket: \n${client_socket}\n============\n`);
-wss.on("connection", handleConnection);
+wss.on("connection", (client_socket) =>
+  console.log(`============\nsocket: \n${client_socket}\n============\n`)
+);
